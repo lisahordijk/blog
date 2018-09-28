@@ -23,6 +23,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $pages = Page::all();
+
+        return view('home')->with('pages', $pages);
     }
 }

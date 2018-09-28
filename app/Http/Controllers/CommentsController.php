@@ -17,11 +17,24 @@ class CommentsController extends Controller
       return back();
     }
 
+    // de comment kan worden geedit
+    public function update (Post $post, Comment $comment)
+    {
+        $this->validate(request(),[
+          'body' => 'required'
+          ]);
+
+        $comment->update(request([
+          'body']));
+
+        return back();
+    }
+
+    // de comment kan worden verwijderd
     public function destroy (Comment $comment)
     {
-    		if ($comment->userCanEdit(Auth::user()) || (Auth::user()->id == $comment->user_id)) {
-    		    $comment->delete();
-    		}
+    		$comment->delete();
+
     		return back();
     }
 }

@@ -29,8 +29,10 @@ class PagesController extends Controller
     public function create()
     {
         //
-        return view('pages.create')->with([
-            'model' => new Page()]);
+        return view('admin.pages.create')->with([
+            'model' => new Page(),
+            'orderPages' => Page::defaultOrder()->withDepth()->get()
+        ]);
     }
 
     /**
@@ -55,16 +57,12 @@ class PagesController extends Controller
      * @param  \App\Page  $page
      * @return \Illuminate\Http\Response
      */
-    public function edit(Page $page)
-    {
-        if (Auth::user()->cant('update', $page)) {
-            return redirect()->route('pages.index');
-        }
-
-        return view('pages.edit', [
-            'model' => $page
-        ]);
-    }
+     public function edit(Page $page)
+     {
+         return view('pages.edit', [
+             'model' => $page
+         ]);
+     }
 
     /**
      * Update the specified resource in storage.
@@ -82,6 +80,10 @@ class PagesController extends Controller
 
         $page->fill($request->only(['title','url','content']))->save();
 
+        if ($response = $this->updatePageOrder($page, $request)) {
+            return $response;
+        }
+
         return redirect()->route('pages.index')->with('status', 'The page was updated.');
     }
 
@@ -95,12 +97,20 @@ class PagesController extends Controller
     // Verwijderen van pagina
     public function destroy(Page $page)
     {
-        if (Auth::user()->cant('delete', $page)) {
-            return redirect()->route('pages.index');
-        }
-
         $page->delete();
 
         return redirect()->route('pages.index')->with('status', 'The page was deleted.');
+    }
+
+    protected function updatePageOrder(Page $page, Request $request)
+    {
+        if ($request->has('order', 'orderPage')) {
+
+            if ($page->id == $request->orderPage) {
+                return redirect()->route('pages.index')->with('status', 'Een pagina kan niet met zichzelf worden gesorteerd.');
+            }
+
+            $page->updateOrder($request->order, $request->orderPage);
+        }
     }
 }

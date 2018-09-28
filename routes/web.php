@@ -34,3 +34,5 @@ Route::post('/login', 'SessionsController@store');
 Route::get('/logout', 'SessionsController@destroy');
 
 Route::resource('/pages', 'PagesController', ['except' => ['show']]);
+Route::resource('/blog/{post}/comments', 'CommentsController');
+Route::get('/delete/{comment}', 'CommentsController@destroy');

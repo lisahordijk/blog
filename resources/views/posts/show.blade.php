@@ -33,28 +33,35 @@
       <hr>
 
       <div class="comments">
+  			<ul class="list-group">
+  			<!-- De comments van een post worden weergegeven en kunnen worden bewerkt -->
+  			@foreach ($post->comments as $comment)
+  				<li class="list-group-item">
+  					<strong>{{ $comment->created_at->diffForHumans() }}</strong> door <strong>{{ $comment->user->name }}</strong>: &nbsp;
+  					<br><br>{{ $comment->body }}
+  					<!-- De delete en wijzig knoppen worden alleen getoond aan geauthorizeerde gebruikers, hierbij moet worden gecontroleerd of ze zijn ingelogd EN of ze mogen bewerken (admin/editor of de auteur van de post) -->
 
-        <ul class="list-group">
+  							<div class="comment-header d-flex justify-content-between">
+                    			  <div class="user d-flex align-items-center"></div>
+  		                    </div>
+  							<br>
+  							<form method="POST" action="/blog/{{ $post->id }}/comments/{{ $comment->id }}">
+  								{{ csrf_field() }}
+  								{{ method_field('PUT') }}
 
-          @foreach ($post->comments as $comment)
+  								<div class="form-group">
+  									<textarea name="body" placeholder="Your comment here." class="form-control">{{ $comment->body }}</textarea>
+  								</div>
 
-            <li class="list-group-item">
-
-              <strong>
-
-                {{ $comment->created_at->diffForHumans() }}: &nbsp;
-
-              </strong>
-
-              {{ $comment->body }}
-
-            </li>
-
-          @endforeach
-
-        </ul>
-
-      </div>
+  								<div class="form-group">
+  									<button type="submit" class="btn btn-primary btn-sm">Edit</button>
+  									<a href="/delete/{{ $comment->id }}" class="btn btn-danger btn-sm" type="button">Delete</a>
+  								</div>
+  							</form>
+  				</li>
+  			@endforeach
+  			</ul>
+  		</div>
 
       Add a comment :)
 
