@@ -37,8 +37,7 @@ class PagesController extends Controller
     {
         // maak nieuwe pagina
         return view('pages.create')->with([
-            'model' => new Page(),
-            'orderPages' => Page::defaultOrder()->withDepth()->get()
+            'model' => new Page()
         ]);
     }
 
