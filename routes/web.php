@@ -14,6 +14,7 @@
 // dd('App\Billings\Stripe');
 
 Route::get('/', 'PostController@index')->name('home');
+
 Route::get('/posts/create', 'PostController@create');
 Route::post('/posts', 'PostController@store');
 Route::get('/posts/{post}', 'PostController@show');
@@ -24,7 +25,7 @@ Route::post('/posts/{post}/comments', 'CommentsController@store');
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', 'HomeController@index')->name('home');
 
 //Route::get('/register', 'RegistrationController@create');
 //Route::post('/register', 'RegistrationController@store');
@@ -34,5 +35,6 @@ Route::post('/login', 'SessionsController@store');
 Route::get('/logout', 'SessionsController@destroy');
 
 Route::resource('/pages', 'PagesController', ['except' => ['show']]);
-Route::resource('/blog/{post}/comments', 'CommentsController');
 Route::get('/delete/{comment}', 'CommentsController@destroy');
+Route::get('/delete/post/{post}', 'PostController@destroy');
+//Route::resource('/blog/{post}/comments', 'CommentsController');

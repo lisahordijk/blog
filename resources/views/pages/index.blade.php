@@ -29,7 +29,7 @@
                 <td>{{ $page->url }}</td>
                 <td class="text-right">
                     <!-- Waarschuwing bij het verwijderen van een post -->
-                    <a href="{{ route('pages.destroy', ['page' => $page->id])}}" class="btn btn-danger delete-link" 
+                    <a href="{{ route('pages.destroy', ['page' => $page->id])}}" class="btn btn-danger delete-link"
                         data-message="Are you sure you want to delete this page?"
                         data-form="delete-form">
                             Delete

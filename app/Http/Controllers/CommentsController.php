@@ -8,6 +8,7 @@ use App\Comment;
 
 class CommentsController extends Controller
 {
+    // validate and store posts
     public function store(Post $post)
     {
       $this->validate(request(), ['body' => 'required|min:2']);

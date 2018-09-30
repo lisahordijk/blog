@@ -27,6 +27,7 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    // specificaties user
     public function pages()
     {
         return $this->hasMany('App\Page');
@@ -40,11 +41,5 @@ class User extends Authenticatable
     public function publish(Post $post)
     {
       $this->posts()->save($post);
-
-      //   Post::create([
-      //     'title' => request('title'),
-      //     'body' => request('body'),
-      //     'user_id' => auth()->id()
-      // ]);
     }
 }

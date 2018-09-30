@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
+use App\Page;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -54,6 +55,12 @@ class RouteServiceProvider extends ServiceProvider
         Route::middleware('web')
              ->namespace($this->namespace)
              ->group(base_path('routes/web.php'));
+
+             $pages = Page::all();
+
+             foreach (\App\Page::all() as $page) {
+               Route::view($page->url, 'pages.page', compact('page', 'pages'));
+             }
     }
 
     /**

@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Task extends Model
 {
+    // specificaties task
     public function scopeIncompete($query)
 
     {

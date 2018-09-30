@@ -6,6 +6,7 @@ use Carbon\Carbon;
 
 class Post extends Model
 {
+  // specificaties posts
   public function comments()
   {
     return $this->hasMany(Comment::class);
@@ -16,6 +17,7 @@ class Post extends Model
     return $this->belongsTo(User::class);
   }
 
+  // een comment toe kunnen voegen
   public function addComment($body)
   {
     $this->comments()->create([
@@ -23,14 +25,9 @@ class Post extends Model
       'body' => $body,
     ]);
 
-    // Comment::create([
-    //
-    //   'body' => $body,
-    //   'post_id' => $this->id
-    //
-    // ]);
   }
 
+  // filter posts op maand en jaar
   public function scopeFilter($query, $filters)
   {
     if (isset($filters['month']))
@@ -45,6 +42,7 @@ class Post extends Model
     }
   }
 
+  // kopje archives dat sorteer werk doet
   public static function archives()
   {
     return static::selectRaw('year(created_at) year, monthname(created_at) month, count(*) published')
@@ -54,6 +52,7 @@ class Post extends Model
     ->toArray();
   }
 
+  // de tags
   public function tags()
   {
     return $this->belongsToMany(Tag::class);

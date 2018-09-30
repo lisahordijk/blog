@@ -14,6 +14,13 @@ class PagesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+   public function __construct()
+   {
+     $this->middleware('auth')->except(['index', 'show']);
+   }
+
+   // laat de paginas zien
     public function index()
     {
         $pages = Page::paginate(5);
@@ -28,8 +35,8 @@ class PagesController extends Controller
      */
     public function create()
     {
-        //
-        return view('admin.pages.create')->with([
+        // maak nieuwe pagina
+        return view('pages.create')->with([
             'model' => new Page(),
             'orderPages' => Page::defaultOrder()->withDepth()->get()
         ]);
@@ -42,7 +49,7 @@ class PagesController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    // Een nieuwe pagina kan hiermee worden opgeslagen door de ingevoerde informatie op te vragen van de form in de view.
+    // Een nieuwe pagina kan hiermee worden opgeslagen door de ingevoerde informatie op te vragen van de form in de view
     public function store(Request $request)
     {
         Auth::user()->pages()->save(new Page($request->only([
@@ -102,6 +109,7 @@ class PagesController extends Controller
         return redirect()->route('pages.index')->with('status', 'The page was deleted.');
     }
 
+    // zorg dat de pagina order wordt geupdate
     protected function updatePageOrder(Page $page, Request $request)
     {
         if ($request->has('order', 'orderPage')) {

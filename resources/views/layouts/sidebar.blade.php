@@ -4,6 +4,7 @@
     <p class="mb-0">Welcome to Lisa's blog. This website is created for an assignment.</p>
   </div>
 
+ <!-- Show links to the archives -->
   <div class="p-3">
     <h4 class="font-italic">Archives</h4>
     <ol class="list-unstyled mb-0">
@@ -22,6 +23,7 @@
     </ol>
   </div>
 
+  <!-- Show links to the tags -->
   <div class="p-3">
     <h4 class="font-italic">Tags</h4>
     <ol class="list-unstyled mb-0">

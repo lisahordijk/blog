@@ -28,6 +28,15 @@
 
       @endif
 
+      <form method="POST" action="{{ $post->id }}">
+        {{ csrf_field() }}
+        {{ method_field('PUT') }}
+
+        <div class="form-group">
+          <a href="/delete/post/{{ $post->id }}" class="btn btn-danger btn-sm" type="button">Delete</a>
+        </div>
+      </form>
+
       {{ $post->body }}
 
       <hr>

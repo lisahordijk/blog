@@ -1,6 +1,6 @@
 @extends ('layouts.master')
 
-@secion ('content')
+@section ('content')
 
 <div class="col-sm-8 blog-main">
   {{$page->content}}

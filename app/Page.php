@@ -10,6 +10,7 @@ use Laracasts\Presenter\PresentableTrait;
 
 class Page extends Model
 {
+    // specificaties pages
     protected $fillable = [
         'title',
         'url',

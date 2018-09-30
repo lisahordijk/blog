@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 
 class RegistrationController extends Controller
 {
+    // formulier en redirect voor nieuwe registratie
     public function create()
     {
       return view('registration.create');

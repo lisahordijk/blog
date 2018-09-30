@@ -8,6 +8,7 @@ use App\Task;
 class TasksController extends Controller
 {
 
+  // test
   public function index()
   {
     $tasks = Task::all();
@@ -17,7 +18,7 @@ class TasksController extends Controller
   public function show(Task $task)
   {
     return $task;
-    
+
     return view('tasks/show', compact('task'));
   }
 

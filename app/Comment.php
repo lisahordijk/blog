@@ -5,7 +5,7 @@ use App\Post;
 
 class Comment extends Model
 {
-
+    // specificaties comments
     protected $fillable = [
       'user_id',
       'body',
